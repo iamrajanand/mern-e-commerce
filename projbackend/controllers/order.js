@@ -1,4 +1,5 @@
 
+var nodemailer = require('nodemailer');
 const {Order,ProductCart} =require("../models/order");
 
 
@@ -26,6 +27,28 @@ exports.createOrder=(req,res)=>{
                 error:"Failed to save your order in DB"
             });
         }
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'renusinha2jan@gmail.com',
+              pass: 'Raaz4789@'
+            }
+          });
+          
+          var mailOptions = {
+            from: 'renusinha2jan@gmail.com',
+            to: req.profile.email,
+            subject: 'Confirmation Of Order ',
+            text: 'Your Order has Been Accepted ! Keep Shopping more :)'
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
         res.json(order);
     });
 };

@@ -26,7 +26,7 @@ export default function Home() {
     }, [])
    
   return (
-    <Base title="Home Page" description="Welcome to the Tshirt store">
+    <Base title="Welcome to the Tshirt store" description="">
     
       <div className="row text-center" >
             
